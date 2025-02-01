@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Task Details</h1>
+    </header>
+
+    <section>
+        <h2>Assigned Tasks</h2>
+        <ul id="task-details-list"></ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Volunteer Management System</p>
+    </footer>
+
+    <script>
+        // Retrieve volunteers and their tasks from localStorage
+        const volunteers = JSON.parse(localStorage.getItem('volunteers')) || [];
+        const taskDetailsList = document.getElementById('task-details-list');
+
+        // Display assigned tasks
+        volunteers.forEach(volunteer => {
+                    const volunteerItem = document.createElement('li');
+                    volunteerItem.innerHTML = `
+                <strong>Volunteer ID: ${volunteer.id}</strong><br>
+                <strong>${volunteer.name}</strong> (${volunteer.email})
+                <ul>
+                    ${volunteer.tasks.length > 0
+                        ? volunteer.tasks.map(task => `
+                            <li><strong>${task.name}</strong>: ${task.description}</li>
+                        `).join('')
+                        : '<li>No tasks assigned</li>'
+                    }
+                </ul>
+            `;
+            taskDetailsList.appendChild(volunteerItem);
+        });
+    </script>
+</body>
+
+</html>

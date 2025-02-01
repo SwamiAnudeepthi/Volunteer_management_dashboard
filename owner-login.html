@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Owner Login</h2>
+    <form id="login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Define the owner's email and password
+            const ownerEmail = "anudeepthiswami@gmail.com"; // Replace with actual owner email
+            const ownerPassword = "KLH@1234"; // Replace with actual owner password
+
+            // Check if the entered credentials match the owner's credentials
+            if (email === ownerEmail && password === ownerPassword) {
+                localStorage.setItem("loggedInUserEmail", email);
+                localStorage.setItem("loggedInUserPassword", password);
+                alert("Login successful!");
+                window.location.href = "manage-volunteers.html"; // Redirect to Manage Volunteers page
+            } else {
+                alert("Access denied! Invalid email or password.");
+            }
+        });
+    </script>
+</body>
+
+</html>

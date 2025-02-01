@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <h1>SERVEWELL</h1>
+            <h3>Volunteer Dashboard</h3>
+            <img src="assets/logo.jpeg" alt="Logo" class="logo">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="task-details.html">All Volunteers</a></li>
+                    <li id="profile-link" style="display: none;"><a href="profile.html">Profile</a></li>
+                    <li id="manage-volunteers-link" style="display: none;"><a href="manage-volunteers.html">Manage Volunteers</a></li>
+                    <li id="assign-tasks-link" style="display: none;"><a href="assign-tasks.html">Assign Tasks</a></li>
+                </ul>
+            </nav>
+            <!-- Owner Login Button -->
+            <button id="owner-login-btn">Owner Login</button>
+            <button id="logout-btn" style="display: none;">Logout</button>
+        </div>
+    </header>
+
+    <section id="intro">
+        <h1>Welcome to Volunteer Management Dashboard</h1>
+        <p>Manage volunteers, assign tasks, and track their progress easily!</p>
+        <a href="manage-volunteers.html" id="get-started-btn" class="get-started-btn" style="display: none;">Get Started</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Volunteer Dashboard Management System</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ownerLoginBtn = document.getElementById("owner-login-btn");
+            const logoutBtn = document.getElementById("logout-btn");
+            const getStartedBtn = document.getElementById("get-started-btn");
+
+            const ownerEmail = "anudeepthiswami@gmail.com"; // Owner's email
+            const ownerPassword = "KLH@1234"; // Owner's password
+            const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
+
+            // Check if logged-in user is the owner
+            if (loggedInUserEmail === ownerEmail) {
+                document.getElementById("manage-volunteers-link").style.display = "block";
+                document.getElementById("assign-tasks-link").style.display = "block";
+                document.getElementById("profile-link").style.display = "block";
+                ownerLoginBtn.style.display = "none";
+                logoutBtn.style.display = "block";
+                getStartedBtn.style.display = "inline-block"; // Show Get Started Button
+            }
+
+            // Owner Login functionality
+            ownerLoginBtn.addEventListener("click", () => {
+                const email = prompt("Enter Owner Email:");
+                const password = prompt("Enter Owner Password:");
+                if (email === ownerEmail && password === ownerPassword) {
+                    localStorage.setItem("loggedInUserEmail", email);
+                    alert("Login successful!");
+                    location.reload(); // Refresh page to apply changes
+                } else {
+                    alert("Invalid credentials! Access denied.");
+                }
+            });
+
+            // Logout functionality
+            logoutBtn.addEventListener("click", () => {
+                localStorage.removeItem("loggedInUserEmail");
+                alert("Logged out successfully!");
+                location.reload(); // Refresh page after logout
+            });
+        });
+    </script>
+</body>
+
+</html>
